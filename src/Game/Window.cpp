@@ -4,12 +4,9 @@
 
 using std::string;
 
-Window::Window(unsigned w, unsigned h, string title)
+Window::Window(unsigned w, unsigned h, string title) :
+    height(h), width(w), title(title)
 {
-    this->height = h;
-    this->width = w;
-    this->title = title;
-
     this->startGlut();
 }
 

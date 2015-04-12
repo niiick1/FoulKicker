@@ -6,73 +6,26 @@
 Game::Game()
 {
     this->window = new Window(800, 600, "Foul Kicker");
-//    this->layers = new Layer*[7];
 
-    Layer* l0 = new Layer();
-    RGBAColor color(255, 127, 0);
-    l0->setImage("C:/Projects/OpenGL/FoulKicker/resources/img/stadium.ptm");
-//    l0->fillColor(color, 800, 600);
-    l0->setX(0);
-    l0->setY(0);
+    Layer* background = new Layer();
+    background->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/stadium.ptm");
+    background->setX(0);
+    background->setY(0);
 
-    this->layers.push_back(l0);
-    //this->layers[0] = l0;
+    this->layers.push_back(background);
 
-    Layer* l1 = new Layer();
-    l1->setImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T0.ptm");
-    l1->setX(50);
-    l1->setY(150);
+    Layer* ball = new Layer();
+    ball->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T0.ptm");
+    ball->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T1.ptm");
+    ball->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T2.ptm");
+    ball->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T3.ptm");
+    ball->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T4.ptm");
+    ball->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T5.ptm");
+    ball->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T6.ptm");
+    ball->setX(50);
+    ball->setY(150);
 
-    this->layers.push_back(l1);
-//    this->layers[1] = l1;
-
-    Layer* l2 = new Layer();
-    l2->setImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T1.ptm");
-    l2->setX(120);
-    l2->setY(150);
-
-    this->layers.push_back(l2);
-//    this->layers[2] = l2;
-
-    Layer* l3 = new Layer();
-    l3->setImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T2.ptm");
-    l3->setX(190);
-    l3->setY(150);
-
-    this->layers.push_back(l3);
-//    this->layers[3] = l3;
-
-    Layer* l4 = new Layer();
-    l4->setImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T3.ptm");
-    l4->setX(260);
-    l4->setY(150);
-
-    this->layers.push_back(l4);
-//    this->layers[4] = l4;
-
-    Layer* l5 = new Layer();
-    l5->setImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T4.ptm");
-    l5->setX(330);
-    l5->setY(150);
-
-    this->layers.push_back(l5);
-//    this->layers[5] = l5;
-
-    Layer* l6 = new Layer();
-    l6->setImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T5.ptm");
-    l6->setX(400);
-    l6->setY(150);
-
-    this->layers.push_back(l6);
-//    this->layers[6] = l6;
-
-    Layer* l7 = new Layer();
-    l7->setImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T6.ptm");
-    l7->setX(470);
-    l7->setY(150);
-
-    this->layers.push_back(l7);
-//    this->layers[7] = l7;
+    this->layers.push_back(ball);
 
     this->run();
 }
@@ -84,7 +37,9 @@ Game::~Game()
 
 void Game::animateBall() {
     Layer* ball = this->layers.at(1);
-    ball->setX(ball->getX() + 20);
+    ball->nextFrame();
+    ball->setX(ball->getX() + 10);
+    ball->setY(ball->getY() + 5);
     this->run();
 }
 
@@ -92,9 +47,10 @@ void Game::run() {
     if (!this->scene)
         this->scene = new Image(this->window->getWidth(), this->window->getHeight());
 
-    for (int i = 0; i < 8; i++) {
+    int length = this->layers.size();
+    for (int i = 0; i < length; i++) {
         Layer* layer = this->layers.at(i);
-        Image* img = layer->getImage();
+        Image* img = layer->getCurrentImage();
 
         if (!img) continue;
 
@@ -108,11 +64,13 @@ void Game::run() {
                 if (x + layer->getX() >= scene->getWidth()) break;
                 if (x + layer->getX() < 0) continue;
 
-                unsigned scenePixel = scene->getPixel(x + layer->getX(), y + layer->getY()),
-                    imgPixel = img->getPixel(x, y);
+//                unsigned scenePixel = scene->getPixel(x + layer->getX(), y + layer->getY()),
+//                    imgPixel = img->getPixel(x, y);
 
-                if (((imgPixel >> 24) & 0xff) != 0) {
-                    this->scene->setPixel(imgPixel, x + layer->getX(), y + layer->getY());
+                RGBAColor imgPixel(img->getPixel(x, y));
+
+                if (imgPixel.getA() != 0) {
+                    this->scene->setPixel(imgPixel.getARGB(), x + layer->getX(), y + layer->getY());
                 }
             }
         }

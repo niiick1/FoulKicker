@@ -10,7 +10,7 @@
 	<string>
 	"Image.h"
 
-1428193730 c:\projects\opengl\foulkicker\include\image.h
+1428813702 c:\projects\opengl\foulkicker\include\image.h
 
 1428805844 c:\projects\opengl\foulkicker\include\game.h
 	<vector>
@@ -20,39 +20,37 @@
 1428197901 c:\projects\opengl\foulkicker\include\window.h
 	<string>
 
-1428268474 source:c:\projects\opengl\foulkicker\src\color\rgbacolor.cpp
+1428813378 source:c:\projects\opengl\foulkicker\src\color\rgbacolor.cpp
 	"RGBAColor.h"
 
-1428266391 c:\projects\opengl\foulkicker\include\rgbacolor.h
+1428813368 c:\projects\opengl\foulkicker\include\rgbacolor.h
 
-1428799961 source:c:\projects\opengl\foulkicker\src\game\game.cpp
+1428813427 source:c:\projects\opengl\foulkicker\src\game\game.cpp
 	"Game.h"
 	<GL/gl.h>
 	<GL/glut.h>
 	"RGBAColor.h"
-	<dos.h>
-	<stdio.h>
-	<windows.h>
 
-1428198698 source:c:\projects\opengl\foulkicker\src\game\window.cpp
+1428800460 source:c:\projects\opengl\foulkicker\src\game\window.cpp
 	"Window.h"
 	<GL/gl.h>
 	<GL/glut.h>
 
-1428188598 source:c:\projects\opengl\foulkicker\src\image\image.cpp
+1428813720 source:c:\projects\opengl\foulkicker\src\image\image.cpp
 	"Image.h"
 	<iostream>
 
-1428268545 source:c:\projects\opengl\foulkicker\src\image\layer.cpp
+1428813567 source:c:\projects\opengl\foulkicker\src\image\layer.cpp
 	"Layer.h"
 	"PTMReader.h"
 
-1428266850 c:\projects\opengl\foulkicker\include\layer.h
+1428813595 c:\projects\opengl\foulkicker\include\layer.h
 	<string>
+	<vector>
 	"Image.h"
 	"RGBAColor.h"
 
-1428198384 source:c:\projects\opengl\foulkicker\src\image\ptmreader.cpp
+1428801597 source:c:\projects\opengl\foulkicker\src\image\ptmreader.cpp
 	"PTMReader.h"
 	<fstream>
 	<iostream>

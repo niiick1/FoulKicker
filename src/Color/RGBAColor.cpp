@@ -1,12 +1,19 @@
 #include "RGBAColor.h"
 
+RGBAColor::RGBAColor() : r(0), g(0), b(0), a(255), argb(toARGB())
+{}
+
 RGBAColor::RGBAColor(unsigned r, unsigned g, unsigned b, unsigned a)
-{
-    this->r = r;
-    this->g = g;
-    this->b = b;
-    this->a = a;
-}
+    : r(r), g(g), b(b), a(a), argb(toARGB())
+{}
+
+RGBAColor::RGBAColor(unsigned argb) :
+    r(argb >> 16 & 0xff),
+    g(argb >> 8 & 0xff),
+    b(argb & 0xff),
+    a(argb >> 24 & 0xff),
+    argb(argb)
+{}
 
 RGBAColor::~RGBAColor()
 {

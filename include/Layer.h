@@ -2,6 +2,7 @@
 #define LAYER_H
 
 #include <string>
+#include <vector>
 #include "Image.h"
 #include "RGBAColor.h"
 
@@ -13,12 +14,14 @@ class Layer
         Layer();
         virtual ~Layer();
 
-        Image* getImage() { return this->img; }
-        void setImage(Image* img) { this->img = img; }
-        void setImage(string path);
-
+        void addImage(string path);
         void fillColor(RGBAColor color, int w, int h);
 
+        Image* getCurrentImage();
+        void nextFrame();
+
+        unsigned getCurrentPos() { return this->currentPos; }
+        void setCurrentPos(unsigned currentPos) { this->currentPos = currentPos; }
         int getX() { return this->x; }
         void setX(int x) { this->x = x; }
         int getY() { return this->y; }
@@ -27,7 +30,8 @@ class Layer
         void setZ(int z) { this->z = z; }
     protected:
     private:
-        Image* img;
+        unsigned currentPos;
+        std::vector<Image*> sprite;
         int x;
         int y;
         int z;

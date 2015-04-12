@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1428365563 source:c:\projects\opengl\foulkicker\main.cpp
+1428814697 source:c:\projects\opengl\foulkicker\main.cpp
 	<GL/gl.h>
 	<GL/glut.h>
 	"PTMReader.h"
@@ -25,18 +25,18 @@
 
 1428813368 c:\projects\opengl\foulkicker\include\rgbacolor.h
 
-1428813427 source:c:\projects\opengl\foulkicker\src\game\game.cpp
+1428815344 source:c:\projects\opengl\foulkicker\src\game\game.cpp
 	"Game.h"
 	<GL/gl.h>
 	<GL/glut.h>
 	"RGBAColor.h"
 
-1428800460 source:c:\projects\opengl\foulkicker\src\game\window.cpp
+1428813790 source:c:\projects\opengl\foulkicker\src\game\window.cpp
 	"Window.h"
 	<GL/gl.h>
 	<GL/glut.h>
 
-1428813720 source:c:\projects\opengl\foulkicker\src\image\image.cpp
+1428813734 source:c:\projects\opengl\foulkicker\src\image\image.cpp
 	"Image.h"
 	<iostream>
 

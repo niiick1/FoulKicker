@@ -22,8 +22,8 @@ Game::Game()
     ball->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T4.ptm");
     ball->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T5.ptm");
     ball->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/bolaAnimadaPTM_T6.ptm");
-    ball->setX(50);
-    ball->setY(150);
+    ball->setX(0);
+    ball->setY(0);
 
     this->layers.push_back(ball);
 
@@ -38,8 +38,17 @@ Game::~Game()
 void Game::animateBall() {
     Layer* ball = this->layers.at(1);
     ball->nextFrame();
-    ball->setX(ball->getX() + 10);
-    ball->setY(ball->getY() + 5);
+
+    int posX = ball->getX() + 5,
+        posY = ball->getY() + 3;
+
+    if (posX > (int)this->window->getWidth() || posY > (int)this->window->getHeight()) {
+        posX = -20;
+        posY = -20;
+    }
+
+    ball->setX(posX);
+    ball->setY(posY);
     this->run();
 }
 
@@ -59,6 +68,7 @@ void Game::run() {
 
         for (int y = 0; y < height; y++) {
             if (y + layer->getY() >= scene->getHeight()) break;
+            if (y + layer->getY() < 0) continue;
 
             for (int x = 0; x < width; x++) {
                 if (x + layer->getX() >= scene->getWidth()) break;

@@ -18,7 +18,7 @@ void animate(int t) {
 
     glutPostRedisplay();
     // Reset timer
-    glutTimerFunc(50, animate, 0);
+    glutTimerFunc(30, animate, 0);
 }
 
 int main(int argc, char* argv[])
@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 
     glutDisplayFunc(render);
 
-    glutTimerFunc(50, animate, 0);
+    glutTimerFunc(30, animate, 0);
     glutMainLoop();
 
     return 0;   /* ISO C requires main to return int. */

@@ -12,7 +12,7 @@
 
 1428813702 c:\projects\opengl\foulkicker\include\image.h
 
-1428805844 c:\projects\opengl\foulkicker\include\game.h
+1428878984 c:\projects\opengl\foulkicker\include\game.h
 	<vector>
 	"Window.h"
 	"Layer.h"
@@ -25,7 +25,7 @@
 
 1428813368 c:\projects\opengl\foulkicker\include\rgbacolor.h
 
-1428815344 source:c:\projects\opengl\foulkicker\src\game\game.cpp
+1428888437 source:c:\projects\opengl\foulkicker\src\game\game.cpp
 	"Game.h"
 	<GL/gl.h>
 	<GL/glut.h>
@@ -40,11 +40,11 @@
 	"Image.h"
 	<iostream>
 
-1428813567 source:c:\projects\opengl\foulkicker\src\image\layer.cpp
+1428888331 source:c:\projects\opengl\foulkicker\src\image\layer.cpp
 	"Layer.h"
 	"PTMReader.h"
 
-1428813595 c:\projects\opengl\foulkicker\include\layer.h
+1428888326 c:\projects\opengl\foulkicker\include\layer.h
 	<string>
 	<vector>
 	"Image.h"
@@ -55,4 +55,10 @@
 	<fstream>
 	<iostream>
 	<string>
+
+1428879597 source:c:\projects\opengl\foulkicker\src\image\sprite.cpp
+	"Sprite.h"
+
+1428878544 c:\projects\opengl\foulkicker\include\sprite.h
+	"Image.h"
 

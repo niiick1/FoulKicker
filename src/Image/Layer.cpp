@@ -11,15 +11,15 @@ Layer::~Layer()
 
 void Layer::addImage(string path) {
     PTMReader ptm;
-    this->sprite.push_back(ptm.readFile(path));
+    this->img = ptm.readFile(path);
 }
 
-Image* Layer::getCurrentImage() {
-    return this->sprite.at(currentPos);
+Image* Layer::getImage() {
+    return this->img;
 }
 
 void Layer::nextFrame() {
-    if (this->currentPos == this->sprite.size() - 1) {
+    if (this->currentPos >= this->frameCount - 1) {
         this->currentPos = 0;
     } else {
         this->currentPos++;
@@ -36,6 +36,5 @@ void Layer::fillColor(RGBAColor color, int w, int h) {
         }
     }
 
-    this->sprite.clear();
-    this->sprite.push_back(img);
+    this->img = img;
 }

@@ -17,7 +17,7 @@ class Layer
         void addImage(string path);
         void fillColor(RGBAColor color, int w, int h);
 
-        Image* getCurrentImage();
+        Image* getImage();
         void nextFrame();
 
         unsigned getCurrentPos() { return this->currentPos; }
@@ -28,13 +28,31 @@ class Layer
         void setY(int y) { this->y = y; }
         int getZ() { return this->z; }
         void setZ(int z) { this->z = z; }
+
+        int getFrameWidth() { return this->frameWidth; }
+        void setFrameWidth(int w) { this->frameWidth = w; }
+        int getFrameHeight() { return this->frameHeight; }
+        void setFrameHeight(int h) { this->frameHeight = h; }
+        int getOffsetX() { return this->offsetX; }
+        void setOffsetX(int x) { this->offsetX = x; }
+        int getOffsetY() { return this->offsetY; }
+        void setOffsetY(int y) { this->offsetY = y; }
+        int getFrameCount() { return this->frameCount; }
+        void setFrameCount(int frameCount) { this->frameCount = frameCount; }
     protected:
     private:
         unsigned currentPos;
-        std::vector<Image*> sprite;
+        Image* img;
         int x;
         int y;
         int z;
+
+        int frameWidth;
+        int frameHeight;
+        int offsetX;
+        int offsetY;
+        int frameCount;
+        int currentFrame;
 };
 
 #endif // LAYER_H

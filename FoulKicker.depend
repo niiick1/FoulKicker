@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1428814697 source:c:\projects\opengl\foulkicker\main.cpp
+1428890153 source:c:\projects\opengl\foulkicker\main.cpp
 	<GL/gl.h>
 	<GL/glut.h>
 	"PTMReader.h"
@@ -10,7 +10,7 @@
 	<string>
 	"Image.h"
 
-1428813702 c:\projects\opengl\foulkicker\include\image.h
+1428897761 c:\projects\opengl\foulkicker\include\image.h
 
 1428878984 c:\projects\opengl\foulkicker\include\game.h
 	<vector>
@@ -25,11 +25,12 @@
 
 1428813368 c:\projects\opengl\foulkicker\include\rgbacolor.h
 
-1428888437 source:c:\projects\opengl\foulkicker\src\game\game.cpp
+1428972389 source:c:\projects\opengl\foulkicker\src\game\game.cpp
 	"Game.h"
 	<GL/gl.h>
 	<GL/glut.h>
 	"RGBAColor.h"
+	"SpriteLayer.h"
 
 1428813790 source:c:\projects\opengl\foulkicker\src\game\window.cpp
 	"Window.h"
@@ -40,11 +41,11 @@
 	"Image.h"
 	<iostream>
 
-1428888331 source:c:\projects\opengl\foulkicker\src\image\layer.cpp
+1428972219 source:c:\projects\opengl\foulkicker\src\image\layer.cpp
 	"Layer.h"
 	"PTMReader.h"
 
-1428888326 c:\projects\opengl\foulkicker\include\layer.h
+1428972024 c:\projects\opengl\foulkicker\include\layer.h
 	<string>
 	<vector>
 	"Image.h"
@@ -56,9 +57,18 @@
 	<iostream>
 	<string>
 
-1428879597 source:c:\projects\opengl\foulkicker\src\image\sprite.cpp
+1428972430 source:c:\projects\opengl\foulkicker\src\image\sprite.cpp
 	"Sprite.h"
+	"RGBAColor.h"
 
-1428878544 c:\projects\opengl\foulkicker\include\sprite.h
+1428965455 c:\projects\opengl\foulkicker\include\sprite.h
 	"Image.h"
+
+1428972458 source:c:\projects\opengl\foulkicker\src\image\spritelayer.cpp
+	"SpriteLayer.h"
+
+1428972620 c:\projects\opengl\foulkicker\include\spritelayer.h
+	"Layer.h"
+	"Sprite.h"
+	<string>
 

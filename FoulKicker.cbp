@@ -16,7 +16,7 @@
 					<Add directory="include" />
 				</Compiler>
 				<Linker>
-					<Add option="-lopengl32 -lfreeglut" />
+					<Add option="-lopengl32  -lfreeglut" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -42,6 +42,8 @@
 		<Unit filename="include/Layer.h" />
 		<Unit filename="include/PTMReader.h" />
 		<Unit filename="include/RGBAColor.h" />
+		<Unit filename="include/Sprite.h" />
+		<Unit filename="include/SpriteLayer.h" />
 		<Unit filename="include/Window.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Color/RGBAColor.cpp" />
@@ -50,6 +52,8 @@
 		<Unit filename="src/Image/Image.cpp" />
 		<Unit filename="src/Image/Layer.cpp" />
 		<Unit filename="src/Image/PTMReader.cpp" />
+		<Unit filename="src/Image/Sprite.cpp" />
+		<Unit filename="src/Image/SpriteLayer.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

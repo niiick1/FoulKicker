@@ -18,7 +18,7 @@ void animate(int t) {
 
     glutPostRedisplay();
     // Reset timer
-    glutTimerFunc(30, animate, 0);
+    glutTimerFunc(30, animate, ++t);
 }
 
 int main(int argc, char* argv[])

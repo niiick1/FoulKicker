@@ -10,7 +10,6 @@ class Sprite
         virtual ~Sprite();
 
         void nextFrame();
-        Image* draw(Image* scene, int sceneX, int sceneY);
 
         Image* getSprite() { return this->sprite; }
         void setSprite(Image* sprite) { this->sprite = sprite; }

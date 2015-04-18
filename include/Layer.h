@@ -5,6 +5,7 @@
 #include <vector>
 #include "Image.h"
 #include "RGBAColor.h"
+#include "Position.h"
 
 using std::string;
 
@@ -19,7 +20,11 @@ class Layer
         virtual Image* draw(Image* scene, int sceneX, int sceneY);
 
         Image* getImage();
+        void saveCurrentPosition();
 
+        virtual int getWidth();
+        virtual int getHeight();
+        Position* getLastPosition() const { return this->lastPos; };
         int getX() { return this->x; }
         void setX(int x) { this->x = x; }
         int getY() { return this->y; }
@@ -29,6 +34,7 @@ class Layer
     protected:
     private:
         Image* img;
+        Position* lastPos;
         int x;
         int y;
         int z;

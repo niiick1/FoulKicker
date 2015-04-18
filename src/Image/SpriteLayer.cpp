@@ -48,3 +48,15 @@ Image* SpriteLayer::draw(Image* scene, int sceneX, int sceneY) {
     this->nextFrame();
     return scene;
 }
+
+int SpriteLayer::getWidth() {
+    if (!this->sprite) return 0;
+
+    return this->sprite->getFrameWidth();
+}
+
+int SpriteLayer::getHeight() {
+    if (!this->sprite) return 0;
+
+    return this->sprite->getFrameHeight();
+}

@@ -13,6 +13,10 @@ Game::Game()
     background->setX(0);
     background->setY(0);
 
+    Image* bgImg = background->getImage();
+
+    this->scene = new Image(*bgImg);
+    this->bgCopy = bgImg;
     this->layers.push_back(background);
 
     SpriteLayer* ball = new SpriteLayer();
@@ -89,6 +93,8 @@ void Game::animateBall() {
     for (int x = 1; x < 5; x++) {
         Layer* ball = this->layers.at(x);
 
+        ball->saveCurrentPosition();
+
         int posX = ball->getX() + 5,
             posY = ball->getY() + 3;
 
@@ -110,8 +116,34 @@ void Game::run() {
 
     int length = this->layers.size();
 
-    for (int i = 0; i < length; i++) {
+    for (int i = 1; i < length; i++) {
         Layer* layer = this->layers.at(i);
+        Position* lastPos = layer->getLastPosition();
+
+        /* TODO: Refactor it. This code probably should not be here.
+         *
+         * Redraw the part where the layer was located in the previous frame
+         * so it deletes its trace.
+         */
+        if (lastPos) {
+            int layerHeight = layer->getHeight(),
+                layerWidth = layer->getWidth(),
+                height = lastPos->getPosY() + layerHeight,
+                width = lastPos->getPosX() + layerWidth;
+
+            for (int y = lastPos->getPosY(); y < height; y++) {
+                if (y >= scene->getHeight()) break;
+                if (y < 0) continue;
+
+                for (int x = lastPos->getPosX(); x < width; x++) {
+                    if (x >= scene->getWidth()) break;
+                    if (x < 0) continue;
+
+                    unsigned pixel = this->bgCopy->getPixel(x, y);
+                    this->scene->setPixel(pixel, x, y);
+                }
+            }
+        }
 
         layer->draw(this->scene, layer->getX(), layer->getY());
     }

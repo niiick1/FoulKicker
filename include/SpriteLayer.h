@@ -16,6 +16,8 @@ class SpriteLayer : public Layer
         void nextFrame();
 
         Sprite* getSprite() { return this->sprite; }
+        int getWidth();
+        int getHeight();
     protected:
     private:
         Sprite* sprite;

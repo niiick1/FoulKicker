@@ -20,6 +20,7 @@ class Game
     private:
         Window* window;
         Image* scene;
+        Image* bgCopy;
         std::vector<Layer*> layers;
 };
 

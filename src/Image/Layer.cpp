@@ -2,7 +2,9 @@
 #include "PTMReader.h"
 
 Layer::Layer()
-{}
+{
+    this->lastPos = NULL;
+}
 
 Layer::~Layer()
 {}
@@ -56,4 +58,25 @@ Image* Layer::draw(Image* scene, int sceneX, int sceneY) {
     }
 
     return scene;
+}
+
+void Layer::saveCurrentPosition() {
+    if (!this->lastPos) {
+        this->lastPos = new Position(this->x, this->y);
+    } else {
+        this->lastPos->setPosX(this->x);
+        this->lastPos->setPosY(this->y);
+    }
+}
+
+int Layer::getWidth() {
+    if (!this->img) return 0;
+
+    return this->img->getWidth();
+}
+
+int Layer::getHeight() {
+    if (!this->img) return 0;
+
+    return this->img->getHeight();
 }

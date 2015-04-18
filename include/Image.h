@@ -6,6 +6,7 @@ class Image
 {
     public:
         Image(int w, int h);
+        Image(const Image &img);
 
         void setPixel(unsigned argb, int x, int y);
 

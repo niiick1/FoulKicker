@@ -4,10 +4,9 @@
 #include "RGBAColor.h"
 #include "SpriteLayer.h"
 
-Game::Game()
+Game::Game() :
+    window(800, 600, "Foul Kicker")
 {
-    this->window = new Window(800, 600, "Foul Kicker");
-
     Layer* background = new Layer();
     background->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/stadium.ptm");
     background->setX(0);
@@ -22,13 +21,14 @@ Game::Game()
     SpriteLayer* ball = new SpriteLayer();
     ball->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/balls-kick.ptm");
 
-    Sprite* sprite = ball->getSprite();
-    sprite->setFrameCount(7);
-    sprite->setCurrentFrame(0);
-    sprite->setFrameHeight(ball->getImage()->getHeight());
-    sprite->setFrameWidth(32);
-    sprite->setOffsetX(7);
-    sprite->setOffsetY(0);
+    Sprite sprite = ball->getSprite();
+    sprite.setFrameCount(7);
+    sprite.setCurrentFrame(0);
+    sprite.setFrameHeight(ball->getImage()->getHeight());
+    sprite.setFrameWidth(32);
+    sprite.setOffsetX(7);
+    sprite.setOffsetY(0);
+    ball->setSprite(sprite);
 
     ball->setX(0);
     ball->setY(0);
@@ -38,12 +38,13 @@ Game::Game()
     SpriteLayer* ball1 = new SpriteLayer();
     ball1->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/balls-line.ptm");
     sprite = ball1->getSprite();
-    sprite->setFrameCount(7);
-    sprite->setCurrentFrame(0);
-    sprite->setFrameHeight(ball1->getImage()->getHeight());
-    sprite->setFrameWidth(16);
-    sprite->setOffsetX(3);
-    sprite->setOffsetY(0);
+    sprite.setFrameCount(7);
+    sprite.setCurrentFrame(0);
+    sprite.setFrameHeight(ball1->getImage()->getHeight());
+    sprite.setFrameWidth(16);
+    sprite.setOffsetX(3);
+    sprite.setOffsetY(0);
+    ball1->setSprite(sprite);
 
     ball1->setX(50);
     ball1->setY(50);
@@ -53,12 +54,13 @@ Game::Game()
     SpriteLayer* ball2 = new SpriteLayer();
     ball2->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/balls-keeper.ptm");
     sprite = ball2->getSprite();
-    sprite->setFrameCount(7);
-    sprite->setCurrentFrame(0);
-    sprite->setFrameHeight(ball2->getImage()->getHeight());
-    sprite->setFrameWidth(12);
-    sprite->setOffsetX(2);
-    sprite->setOffsetY(0);
+    sprite.setFrameCount(7);
+    sprite.setCurrentFrame(0);
+    sprite.setFrameHeight(ball2->getImage()->getHeight());
+    sprite.setFrameWidth(12);
+    sprite.setOffsetX(2);
+    sprite.setOffsetY(0);
+    ball2->setSprite(sprite);
 
     ball2->setX(100);
     ball2->setY(100);
@@ -68,12 +70,13 @@ Game::Game()
     SpriteLayer* ball3 = new SpriteLayer();
     ball3->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/balls-goal.ptm");
     sprite = ball3->getSprite();
-    sprite->setFrameCount(7);
-    sprite->setCurrentFrame(0);
-    sprite->setFrameHeight(ball3->getImage()->getHeight());
-    sprite->setFrameWidth(9);
-    sprite->setOffsetX(2);
-    sprite->setOffsetY(0);
+    sprite.setFrameCount(7);
+    sprite.setCurrentFrame(0);
+    sprite.setFrameHeight(ball3->getImage()->getHeight());
+    sprite.setFrameWidth(9);
+    sprite.setOffsetX(2);
+    sprite.setOffsetY(0);
+    ball3->setSprite(sprite);
 
     ball3->setX(150);
     ball3->setY(150);
@@ -85,8 +88,8 @@ Game::Game()
 
 Game::~Game()
 {
-    delete this->window;
     delete this->scene;
+    delete this->bgCopy;
 }
 
 void Game::animateBall() {
@@ -98,7 +101,7 @@ void Game::animateBall() {
         int posX = ball->getX() + 5,
             posY = ball->getY() + 3;
 
-        if (posX > (int)this->window->getWidth() || posY > (int)this->window->getHeight()) {
+        if (posX > (int)this->window.getWidth() || posY > (int)this->window.getHeight()) {
             posX = -20;
             posY = -20;
         }
@@ -111,7 +114,7 @@ void Game::animateBall() {
 
 void Game::run() {
     if (!this->scene) {
-        this->scene = new Image(this->window->getWidth(), this->window->getHeight());
+        this->scene = new Image(this->window.getWidth(), this->window.getHeight());
     }
 
     int length = this->layers.size();

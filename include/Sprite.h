@@ -7,6 +7,8 @@ class Sprite
 {
     public:
         Sprite();
+        Sprite(const Sprite& s);
+        Sprite& operator=(const Sprite& s);
         virtual ~Sprite();
 
         void nextFrame();

@@ -15,12 +15,13 @@ class SpriteLayer : public Layer
         Image* draw(Image* scene, int sceneX, int sceneY);
         void nextFrame();
 
-        Sprite* getSprite() { return this->sprite; }
+        Sprite getSprite() { return this->sprite; }
+        void setSprite(Sprite s) { this->sprite = s; }
         int getWidth();
         int getHeight();
     protected:
     private:
-        Sprite* sprite;
+        Sprite sprite;
 };
 
 #endif // SPRITELAYER_H

@@ -16,7 +16,7 @@ Image* PTMReader::readFile(string file)
 
     if (arq.fail()) {
         cout << "Error opening file " << file << endl;
-        return NULL;
+        return nullptr;
     }
 
     string buffer;

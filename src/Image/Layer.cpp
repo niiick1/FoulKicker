@@ -3,7 +3,7 @@
 
 Layer::Layer()
 {
-    this->lastPos = NULL;
+    this->lastPos = nullptr;
 }
 
 Layer::~Layer()

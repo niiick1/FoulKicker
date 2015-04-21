@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    glOrtho(0, g.getWindow()->getWidth(), 0, g.getWindow()->getHeight(), 0, 1.0);
+    glOrtho(0, g.getWindow().getWidth(), 0, g.getWindow().getHeight(), 0, 1.0);
 
     glutDisplayFunc(render);
 

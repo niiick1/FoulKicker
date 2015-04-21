@@ -15,10 +15,11 @@ class Game
         void animateBall();
         void display(void);
 
-        Window* getWindow() { return this->window; }
+        Window getWindow() { return this->window; }
+        Image setup();
     protected:
     private:
-        Window* window;
+        Window window;
         Image* scene;
         Image* bgCopy;
         std::vector<Layer*> layers;

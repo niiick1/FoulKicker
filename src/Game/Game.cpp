@@ -1,6 +1,7 @@
+#include <Windows.h>
 #include "Game.h"
-#include <GL/gl.h>
-#include <GL/glut.h>
+#include <gl\GL.h>
+#include <gl\glut.h>
 #include "RGBAColor.h"
 #include "SpriteLayer.h"
 
@@ -8,7 +9,7 @@ Game::Game() :
     window(800, 600, "Foul Kicker")
 {
     Layer* background = new Layer();
-    background->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/stadium.ptm");
+    background->addImage("resources/img/stadium.ptm");
     background->setX(0);
     background->setY(0);
 
@@ -19,7 +20,7 @@ Game::Game() :
     this->layers.push_back(background);
 
     SpriteLayer* ball = new SpriteLayer();
-    ball->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/balls-kick.ptm");
+    ball->addImage("resources/img/balls-kick.ptm");
 
     Sprite sprite = ball->getSprite();
     sprite.setFrameCount(7);
@@ -36,7 +37,7 @@ Game::Game() :
     this->layers.push_back(ball);
 
     SpriteLayer* ball1 = new SpriteLayer();
-    ball1->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/balls-line.ptm");
+    ball1->addImage("resources/img/balls-line.ptm");
     sprite = ball1->getSprite();
     sprite.setFrameCount(7);
     sprite.setCurrentFrame(0);
@@ -52,7 +53,7 @@ Game::Game() :
     this->layers.push_back(ball1);
 
     SpriteLayer* ball2 = new SpriteLayer();
-    ball2->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/balls-keeper.ptm");
+    ball2->addImage("resources/img/balls-keeper.ptm");
     sprite = ball2->getSprite();
     sprite.setFrameCount(7);
     sprite.setCurrentFrame(0);
@@ -68,7 +69,7 @@ Game::Game() :
     this->layers.push_back(ball2);
 
     SpriteLayer* ball3 = new SpriteLayer();
-    ball3->addImage("C:/Projects/OpenGL/FoulKicker/resources/img/balls-goal.ptm");
+    ball3->addImage("resources/img/balls-goal.ptm");
     sprite = ball3->getSprite();
     sprite.setFrameCount(7);
     sprite.setCurrentFrame(0);

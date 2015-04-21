@@ -1,6 +1,7 @@
+#include <Windows.h>
 #include "Window.h"
-#include <GL/gl.h>
-#include <GL/glut.h>
+#include <gl\GL.h>
+#include <gl\glut.h>
 
 using std::string;
 

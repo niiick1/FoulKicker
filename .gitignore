@@ -31,3 +31,14 @@
 *.depend
 *.layout
 *.cbp
+
+# VisualStudio files
+*.sln
+*.sdf
+*.opensdf
+*.suo
+*.vcxproj
+*.vcxproj.filters
+packages.config
+packages
+Debug

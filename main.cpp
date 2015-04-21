@@ -1,5 +1,6 @@
-#include <GL/gl.h>
-#include <GL/glut.h>
+#include <Windows.h>
+#include <gl\GL.h>
+#include <gl\glut.h>
 #include "PTMReader.h"
 #include "Game.h"
 

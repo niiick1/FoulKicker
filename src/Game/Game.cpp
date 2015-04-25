@@ -21,8 +21,8 @@ Game::Game() :
 
     Layer* goalkeeper = new Layer();
     goalkeeper->addImage("resources/img/goalkeeper.ptm");
-    goalkeeper->setX(400);
-    goalkeeper->setY(250);
+    goalkeeper->setX(399);
+    goalkeeper->setY(208);
 
     this->layers.push_back(goalkeeper);
 
@@ -164,7 +164,6 @@ void Game::run() {
         }
 
         layer->draw(this->scene, layer->getX(), layer->getY());
-        this->bgCopy = this->scene;
     }
 }
 

@@ -98,6 +98,8 @@ Game::Game() :
 
     this->layers.push_back(ball3);
 
+    this->goalkeeperDirection = 1;
+
     this->run();
 }
 
@@ -130,6 +132,27 @@ void Game::animateBall() {
         ball->setX(posX);
         ball->setY(posY);
     }
+
+    Layer* goalkeeper = this->layers.at(1);
+
+    /*
+     * Trave Esquerda x@286
+     * Trave Direita x@506
+     */
+
+    if (goalkeeper->getX() >= 506) {
+        goalkeeperDirection = -1;
+    } else {
+        if (goalkeeper->getX() <= 286) {
+            goalkeeperDirection = 1;
+        }
+    }
+
+    goalkeeper->saveCurrentPosition();
+
+    int goalkeeperPos = goalkeeper->getX();
+    goalkeeperPos += 3 * goalkeeperDirection;
+    goalkeeper->setX(goalkeeperPos);
 
     this->run();
 }
@@ -179,4 +202,3 @@ void Game::display(void) {
 
     glFlush();
 }
-

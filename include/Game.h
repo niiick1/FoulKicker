@@ -22,6 +22,7 @@ class Game
         Window window;
         Image* scene;
         Image* bgCopy;
+        int goalkeeperDirection;
         std::vector<Layer*> layers;
 };
 

@@ -19,6 +19,13 @@ Game::Game() :
     this->bgCopy = bgImg;
     this->layers.push_back(background);
 
+    Layer* goalkeeper = new Layer();
+    goalkeeper->addImage("resources/img/goalkeeper.ptm");
+    goalkeeper->setX(400);
+    goalkeeper->setY(250);
+
+    this->layers.push_back(goalkeeper);
+
     SpriteLayer* ball = new SpriteLayer();
     ball->addImage("resources/img/balls-kick.ptm");
 
@@ -91,10 +98,16 @@ Game::~Game()
 {
     delete this->scene;
     delete this->bgCopy;
+
+    // Properly clean the vector
+    while (!this->layers.empty()) {
+        delete this->layers.back();
+        this->layers.pop_back();
+    }
 }
 
 void Game::animateBall() {
-    for (int x = 1; x < 5; x++) {
+    for (int x = 2; x < 6; x++) {
         Layer* ball = this->layers.at(x);
 
         ball->saveCurrentPosition();
@@ -110,6 +123,7 @@ void Game::animateBall() {
         ball->setX(posX);
         ball->setY(posY);
     }
+
     this->run();
 }
 
@@ -150,6 +164,7 @@ void Game::run() {
         }
 
         layer->draw(this->scene, layer->getX(), layer->getY());
+        this->bgCopy = this->scene;
     }
 }
 

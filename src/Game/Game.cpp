@@ -26,6 +26,13 @@ Game::Game() :
 
     this->layers.push_back(goalkeeper);
 
+    Layer* wall1 = new Layer();
+    wall1->addImage("resources/img/wall-1.ptm");
+    wall1->setX(200);
+    wall1->setY(150);
+
+    this->layers.push_back(wall1);
+
     SpriteLayer* ball = new SpriteLayer();
     ball->addImage("resources/img/balls-kick.ptm");
 
@@ -107,7 +114,7 @@ Game::~Game()
 }
 
 void Game::animateBall() {
-    for (int x = 2; x < 6; x++) {
+    for (int x = 3; x < 7; x++) {
         Layer* ball = this->layers.at(x);
 
         ball->saveCurrentPosition();

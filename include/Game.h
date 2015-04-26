@@ -6,6 +6,8 @@
 #include "Layer.h"
 #include "Ball.h"
 #include "SpriteLayer.h"
+#include "Level.h"
+#include "WallPlayer.h"
 
 class Game
 {
@@ -19,16 +21,20 @@ class Game
         void display(void);
 
         Window getWindow() { return this->window; }
-        Image setup();
     protected:
     private:
         Window window;
         Image* scene;
         Image* bgCopy;
+        Level level;
         Ball ball;
         SpriteLayer ballLayer;
+        WallPlayer wallPlayer;
         int goalkeeperDirection;
         std::vector<Layer*> layers;
+        std::vector<Layer> wallLayers;
+
+        void loadLevel(Level newLevel);
 };
 
 #endif // GAME_H

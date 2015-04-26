@@ -4,9 +4,10 @@
 #include <gl\glut.h>
 #include "RGBAColor.h"
 #include "SpriteLayer.h"
+#include "WallPlayer.h"
 
 Game::Game() :
-    window(800, 600, "Foul Kicker")
+    window(800, 600, "Foul Kicker"), level(0)
 {
     Layer* background = new Layer();
     background->addImage("resources/img/stadium.ptm");
@@ -20,18 +21,20 @@ Game::Game() :
     this->layers.push_back(background);
 
     Layer* goalkeeper = new Layer();
-    goalkeeper->addImage("resources/img/goalkeeper.ptm");
+    goalkeeper->addImage("resources/img/goalkeeper1.ptm");
     goalkeeper->setX(399);
     goalkeeper->setY(208);
 
     this->layers.push_back(goalkeeper);
 
-    Layer* wall1 = new Layer();
-    wall1->addImage("resources/img/wall-1.ptm");
-    wall1->setX(200);
-    wall1->setY(150);
-
-    this->layers.push_back(wall1);
+    /*
+     * TODO: Level layout initialization should be in
+     * another place. Maybe on a file later.
+     */
+    level.addPlayerOnWall(Position(200, 150));
+    level.addPlayerOnWall(Position(250, 150));
+    level.addPlayerOnWall(Position(300, 150));
+    loadLevel(level);
 
     // set speed of the ball
     ball.setSpeedX(5);
@@ -81,10 +84,10 @@ void Game::animateBall(int time) {
 
     /*
      * Trave Esquerda x@286
-     * Trave Direita x@506
+     * Trave Direita x@490
      */
 
-    if (goalkeeper->getX() >= 506) {
+    if (goalkeeper->getX() >= 490) {
         goalkeeperDirection = -1;
     } else {
         if (goalkeeper->getX() <= 286) {
@@ -110,6 +113,10 @@ void Game::run() {
 
     for (int i = 1; i < length; i++) {
         drawLayer(layers.at(i));
+    }
+
+    for (unsigned i = 0; i < wallLayers.size(); i++) {
+        drawLayer(&wallLayers.at(i));
     }
 
     drawLayer(&ballLayer);
@@ -151,4 +158,24 @@ void Game::display(void) {
     glDrawPixels(scene->getWidth(), scene->getHeight(), GL_BGRA_EXT, GL_UNSIGNED_BYTE, scene->getPixels());
 
     glFlush();
+}
+
+void Game::loadLevel(Level newLevel) {
+    while (!wallLayers.empty()) {
+        wallLayers.pop_back();
+    }
+
+    for (int a = 0; a < newLevel.getNumberOfPlayersOnWall(); a++) {
+        Layer player;
+        player.setImage(wallPlayer.getImage());
+
+        const Position* position = level.getPlayerPosition(a);
+
+        if (position) {
+            player.setX(position->getPosX());
+            player.setY(position->getPosY());
+        }
+
+        wallLayers.push_back(player);
+    }
 }

@@ -19,7 +19,8 @@ class Layer
         void fillColor(RGBAColor color, int w, int h);
         virtual Image* draw(Image* scene, int sceneX, int sceneY);
 
-        Image* getImage();
+        Image* getImage() const;
+        void setImage(const Image* img);
         void saveCurrentPosition();
 
         virtual int getWidth();

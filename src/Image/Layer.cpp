@@ -4,6 +4,7 @@
 Layer::Layer()
 {
     this->lastPos = nullptr;
+    this->img = nullptr;
 }
 
 Layer::~Layer()
@@ -14,8 +15,13 @@ void Layer::addImage(string path) {
     this->img = ptm.readFile(path);
 }
 
-Image* Layer::getImage() {
+Image* Layer::getImage() const {
     return this->img;
+}
+
+void Layer::setImage(const Image* img) {
+    if (this->img) delete this->img;
+    this->img = new Image(*img);
 }
 
 void Layer::fillColor(RGBAColor color, int w, int h) {

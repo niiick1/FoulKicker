@@ -9,13 +9,13 @@ class Position
         Position(int x, int y);
         virtual ~Position();
 
-        int getPosX() { return this->posX; }
+        int getPosX() const { return this->posX; }
         void setPosX(int posX) { this->posX = posX; }
-        int getPosY() { return this->posY; }
+        int getPosY() const { return this->posY; }
         void setPosY(int posY) { this->posY = posY; }
-        int getHeight() { return height; }
+        int getHeight() const { return height; }
         void setHeight(int h) { height = h; }
-        int getWidth() { return width; }
+        int getWidth() const { return width; }
         void setWidth(int w) { width = w; }
     protected:
     private:

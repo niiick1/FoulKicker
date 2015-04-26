@@ -1,3 +1,5 @@
+#define _USE_MATH_DEFINES
+
 #include <Windows.h>
 #include "Game.h"
 #include <gl\GL.h>
@@ -5,6 +7,9 @@
 #include "RGBAColor.h"
 #include "SpriteLayer.h"
 #include "WallPlayer.h"
+
+#include <math.h>
+#include <iostream>
 
 Game::Game() :
     window(800, 600, "Foul Kicker"), level(0)
@@ -37,11 +42,11 @@ Game::Game() :
     loadLevel(level);
 
     // set speed of the ball
-    ball.setSpeedX(5);
-    ball.setSpeedY(3);
+    ball.setSpeedX(0);
+    ball.setSpeedY(1);
 
     ballLayer.setSprite(ball.getCurrentSprite());
-    ballLayer.setX(0);
+    ballLayer.setX(400);
     ballLayer.setY(0);
 
     this->goalkeeperDirection = 1;
@@ -61,16 +66,42 @@ Game::~Game()
     }
 }
 
+bool Game::checkForCollision() {
+
+	bool collision = false;
+	
+	Layer* goalkeeper = this->layers.at(1);
+	
+	// GoalKeeper Collision
+	if ((ballLayer.getY() >= goalkeeper->getY() && ballLayer.getY() <= 224) &&
+		(ballLayer.getX() >= goalkeeper->getX() && ballLayer.getX() <= goalkeeper->getX() + goalkeeper->getWidth())) {
+			collision = true;
+	}
+
+	/*
+	* Trave Esquerda x@286
+	* Trave Direita x@490
+	*/
+	if (ball.isOutOfPlay() && (ballLayer.getX() < (286 + 5) || ballLayer.getX() > (490 - 5))) {
+		collision = true;
+	}
+
+	return collision;
+}
+
 void Game::animateBall(int time) {
     ballLayer.saveCurrentPosition();
 
-    int posX = ballLayer.getX() + ball.getSpeedX(),
-        posY = ballLayer.getY() + ball.getSpeedY();
+	//ToDo:: Aplicar calculo de balistica
+	//double v = 3.0;
+	//double angulo = 30.0;
+	//double a = angulo / 180.0 * M_PI;
+	//double z = v * cos(a) * time;
+	//double temp = z / (v * cos(a));
+	//double w = z * tan(a) - 0.5 * 9.8 * (temp * temp);
 
-    if (posX > (int)window.getWidth() || posY > (int)window.getHeight()) {
-        posX = -20;
-        posY = -20;
-    }
+	int posX = ballLayer.getX() + ball.getSpeedX(),
+		posY = ballLayer.getY() + ball.getSpeedY();
 
     ballLayer.setX(posX);
     ballLayer.setY(posY);
@@ -82,7 +113,22 @@ void Game::animateBall(int time) {
 
     Layer* goalkeeper = this->layers.at(1);
 
-    /*
+	/* Detectar gol
+	 * Linha do Gol y@226
+	 */
+	if (Game::checkForCollision()) {
+		if (ball.isOutOfPlay()) {
+			//Goal
+			std::cout << "Goal" << "\n";
+		} else {
+			//Goal Defense
+			std::cout << "Goal Defense" << "\n";
+			ballLayer.setX(400);
+			ballLayer.setY(0);
+		}
+	}
+
+	/*
      * Trave Esquerda x@286
      * Trave Direita x@490
      */
@@ -98,7 +144,7 @@ void Game::animateBall(int time) {
     goalkeeper->saveCurrentPosition();
 
     int goalkeeperPos = goalkeeper->getX();
-    goalkeeperPos += 3 * goalkeeperDirection;
+    goalkeeperPos += 5 * goalkeeperDirection;
     goalkeeper->setX(goalkeeperPos);
 
     this->run();

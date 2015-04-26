@@ -64,3 +64,7 @@ void Ball::nextBall() {
         currentBall = 0;
     }
 }
+
+bool Ball::isOutOfPlay() {
+	return getCurrentSprite().getOffsetY() > 225;
+}

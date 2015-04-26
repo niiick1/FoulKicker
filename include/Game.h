@@ -19,6 +19,7 @@ class Game
         void drawLayer(Layer* layer);
         void animateBall(int time);
         void display(void);
+		bool checkForCollision();		
 
         Window getWindow() { return this->window; }
     protected:

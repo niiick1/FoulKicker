@@ -4,6 +4,8 @@
 #include <vector>
 #include "Window.h"
 #include "Layer.h"
+#include "Ball.h"
+#include "SpriteLayer.h"
 
 class Game
 {
@@ -12,7 +14,8 @@ class Game
         virtual ~Game();
 
         void run();
-        void animateBall();
+        void drawLayer(Layer* layer);
+        void animateBall(int time);
         void display(void);
 
         Window getWindow() { return this->window; }
@@ -22,6 +25,8 @@ class Game
         Window window;
         Image* scene;
         Image* bgCopy;
+        Ball ball;
+        SpriteLayer ballLayer;
         int goalkeeperDirection;
         std::vector<Layer*> layers;
 };

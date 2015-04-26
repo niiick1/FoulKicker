@@ -13,10 +13,16 @@ class Position
         void setPosX(int posX) { this->posX = posX; }
         int getPosY() { return this->posY; }
         void setPosY(int posY) { this->posY = posY; }
+        int getHeight() { return height; }
+        void setHeight(int h) { height = h; }
+        int getWidth() { return width; }
+        void setWidth(int w) { width = w; }
     protected:
     private:
         int posX;
         int posY;
+        int height;
+        int width;
 };
 
 #endif // POSITION_H

@@ -61,12 +61,15 @@ Image* Layer::draw(Image* scene, int sceneX, int sceneY) {
 }
 
 void Layer::saveCurrentPosition() {
-    if (!this->lastPos) {
-        this->lastPos = new Position(this->x, this->y);
+    if (!lastPos) {
+        lastPos = new Position(x, y);
     } else {
-        this->lastPos->setPosX(this->x);
-        this->lastPos->setPosY(this->y);
+        lastPos->setPosX(x);
+        lastPos->setPosY(y);
     }
+
+    lastPos->setHeight(getHeight());
+    lastPos->setWidth(getWidth());
 }
 
 int Layer::getWidth() {

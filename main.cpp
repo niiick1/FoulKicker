@@ -15,7 +15,7 @@ void render(void) {
 }
 
 void animate(int t) {
-    g.animateBall();
+    g.animateBall(t);
 
     glutPostRedisplay();
     // Reset timer

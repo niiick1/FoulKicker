@@ -62,9 +62,5 @@ void Ball::loadAssets() {
 void Ball::nextBall() {
     if (++currentBall >= (int)balls.size()) {
         currentBall = 0;
-    }
-}
-
-bool Ball::isOutOfPlay() {
-	return getCurrentSprite().getOffsetY() > 225;
+    }	
 }

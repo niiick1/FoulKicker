@@ -11,7 +11,6 @@ class Ball
         virtual ~Ball();
 
         void nextBall();
-		bool isOutOfPlay();
         Sprite getCurrentSprite() { return balls.at(currentBall); }
 
         void setCurrentBall(int ball) { currentBall = ball; }

@@ -42,7 +42,7 @@ Game::Game() :
     loadLevel(level);
 
     // set speed of the ball
-    ball.setSpeedX(0);
+    ball.setSpeedX(-1);
     ball.setSpeedY(3);
 
     ballLayer.setSprite(ball.getCurrentSprite());
@@ -72,16 +72,22 @@ bool Game::checkForCollision() {
 	
 	Layer* goalkeeper = this->layers.at(1);
 	
-	// GoalKeeper Collision
+	// GoalKeeper collision
 	if ((ballLayer.getY() >= goalkeeper->getY() && ballLayer.getY() <= 224) &&
 		(ballLayer.getX() >= goalkeeper->getX() && ballLayer.getX() <= goalkeeper->getX() + goalkeeper->getWidth())) {
 			collision = true;
 	}
 
-	/*
-	* Trave Esquerda x@286
-	* Trave Direita x@490
-	*/
+	Layer wall = wallLayers.at(0);
+	
+	// WallLayer collision
+	if (ballLayer.getY() == wall.getY() &&
+		ballLayer.getX() >= wall.getX() &&
+		ballLayer.getX() <= (wall.getX() + wall.getWidth() * wallLayers.size())) {
+			collision = true;
+	}
+
+	// GoalLine collision
 	if (Game::isBallOutOfPlay() && !Game::hasCrossedGoalLine()) {
 		collision = true;
 	}
@@ -125,7 +131,7 @@ void Game::animateBall(int time) {
 
 	if (Game::isBallOutOfPlay() && Game::hasCrossedGoalLine()) {
 		//Goal
-		std::cout << "Goal" << "\n";		
+		std::cout << "Goal" << "\n";
 		ballLayer.setX(400);
 		ballLayer.setY(0);
 	}
@@ -233,5 +239,5 @@ bool Game::isBallOutOfPlay() {
 }
 
 bool Game::hasCrossedGoalLine() {
-	return ballLayer.getX() >= (286 + 5) || ballLayer.getX() <= (490 - 5);
+	return ballLayer.getX() >= (286 + ballLayer.getWidth()) || ballLayer.getX() <= (490 - ballLayer.getWidth());
 }

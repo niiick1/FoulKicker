@@ -19,6 +19,8 @@ class Game
         void drawLayer(Layer* layer);
         void animateBall(int time);
         void display(void);
+		void kick(int x, int y);
+		void prepare();
 
 		bool checkForCollision();
 		bool isBallOutOfPlay();

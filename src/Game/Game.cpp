@@ -41,17 +41,15 @@ Game::Game() :
     level.addPlayerOnWall(Position(300, 150));
     loadLevel(level);
 
-    // set speed of the ball
-    ball.setSpeedX(-1);
-    ball.setSpeedY(3);
+    // set initial speed of the ball
+    ball.setSpeedX(0);
+    ball.setSpeedY(0);
 
     ballLayer.setSprite(ball.getCurrentSprite());
     ballLayer.setX(400);
     ballLayer.setY(0);
 
     this->goalkeeperDirection = 1;
-
-    this->run();
 }
 
 Game::~Game()
@@ -124,16 +122,14 @@ void Game::animateBall(int time) {
 	 */
 	if (Game::checkForCollision()) {
 		//Goal Defense
+		Game::prepare();
 		std::cout << "Goal Defense" << "\n";
-		ballLayer.setX(400);
-		ballLayer.setY(0);
 	}
 
 	if (Game::isBallOutOfPlay() && Game::hasCrossedGoalLine()) {
 		//Goal
+		Game::prepare();
 		std::cout << "Goal" << "\n";
-		ballLayer.setX(400);
-		ballLayer.setY(0);
 	}
 
 	/*
@@ -209,6 +205,7 @@ void Game::drawLayer(Layer* layer) {
 }
 
 void Game::display(void) {
+
     glDrawPixels(scene->getWidth(), scene->getHeight(), GL_BGRA_EXT, GL_UNSIGNED_BYTE, scene->getPixels());
 
     glFlush();
@@ -240,4 +237,32 @@ bool Game::isBallOutOfPlay() {
 
 bool Game::hasCrossedGoalLine() {
 	return ballLayer.getX() >= (286 + ballLayer.getWidth()) || ballLayer.getX() <= (490 - ballLayer.getWidth());
+}
+
+void Game::prepare() {
+	ballLayer.setX(400);
+	ballLayer.setY(0);
+	ball.setSpeedY(0);
+}
+
+void Game::kick(int x, int y) {
+	std::cout << "Kick " << x << "\t" << y << "\n";	
+
+	int diffY = window.getHeight() - y;
+
+	int initialX = ballLayer.getX();
+	int finalX = initialX + ballLayer.getWidth();
+
+	int initialY = ballLayer.getY();
+	int finalY = initialY + ballLayer.getHeight();
+
+	int axisX = finalX - x;
+	int axisY = finalY - abs(diffY);
+
+	if ((axisX >= 0 && axisX <= ballLayer.getWidth()) &&
+		(axisY >= 0 && axisY <= ballLayer.getHeight())) {
+		Game::prepare();
+		ball.setSpeedY(1);
+		std::cout << axisX << "\t" << axisY << "\n";
+	}
 }

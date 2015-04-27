@@ -139,8 +139,11 @@ int Game::animateBall(int time) {
 		double w = z * tan(a) - 0.5 * 98 * (temp * temp);
 
 		//ToDo:: Troca de Bola em Funcao do time por "v"
-		/*ball.nextBall();
-		ballLayer.setSprite(ball.getCurrentSprite());*/
+		if (ballLayer.getY() / 60 >= currentTime) {
+			ball.nextBall();
+			ballLayer.setSprite(ball.getCurrentSprite());
+			currentTime++;
+		}
 
 		int posY = ballLayer.getY() + v;
 		ballLayer.setX(400 + z);

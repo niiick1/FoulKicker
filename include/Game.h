@@ -41,6 +41,7 @@ class Game
         std::vector<Layer> wallLayers;
         std::vector<Level> levels;
         int currentTime;
+		float currentAngleDirection;
 
         bool nextLevel();
         void loadLevel(Level newLevel);

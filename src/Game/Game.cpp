@@ -101,7 +101,7 @@ bool Game::checkForCollision() {
 	// GoalKeeper collision
 	if ((ballLayer.getY() >= goalkeeper->getY() && ballLayer.getY() <= 224) &&
 		(ballLayer.getX() >= goalkeeper->getX() && ballLayer.getX() <= goalkeeper->getX() + goalkeeper->getWidth())) {
-			collision = true;
+		collision = true;
 	}
 
 	Layer wall = wallLayers.at(0);
@@ -110,16 +110,22 @@ bool Game::checkForCollision() {
 	if (ballLayer.getY() == wall.getY() &&
 		ballLayer.getX() >= wall.getX() &&
 		ballLayer.getX() <= (wall.getX() + wall.getWidth() * (int)wallLayers.size())) {
-			collision = true;
+		collision = true;
 	}
 
 	// GoalLine collision
-	if (Game::isBallOutOfPlay() && !Game::hasCrossedGoalLine()) {
+	if (isBallOutOfPlay() && !hasCrossedGoalLine()) {
+		collision = true;
+	}
+
+	// Sideline collision
+	if (ballLayer.getX() > window.getWidth() || ballLayer.getX() < 0) {
 		collision = true;
 	}
 
 	return collision;
 }
+
 
 int Game::animateBall(int time) {
     ballLayer.saveCurrentPosition();
@@ -127,44 +133,49 @@ int Game::animateBall(int time) {
 	if (ball.getSpeedY() == 0) return time;
 
 	//ToDo:: Aplicar calculo de balistica
-	//double v = 3.0;
-	//double angulo = 30.0;
-	//double a = angulo / 180.0 * M_PI;
-	//double z = v * cos(a) * time;
-	//double temp = z / (v * cos(a));
-	//double w = z * tan(a) - 0.5 * 9.8 * (temp * temp);
+	double v = 3.0;
+	double a = (currentAngleDirection * M_PI) / 180.0;
+	double z = v * cos(a) * ++time;
+	double temp = z / (v * cos(a));
+	double w = z * tan(a) - 0.5 * 9.8 * (temp * temp);
 
-	int t0 = 0,   // t = 0
-        t1 = 150, // t = 0.666
-        t2 = 208, // t = 0.924
-        t3 = 225; // t = 1
+	//ToDo:: Troca de Bola em Funcao do time por "v"
+	/*ball.nextBall();
+	ballLayer.setSprite(ball.getCurrentSprite());*/
 
-	int posX = ballLayer.getX() + ball.getSpeedX(),
-		posY = ballLayer.getY() + ball.getSpeedY();
+	int posY = ballLayer.getY() + ball.getSpeedY();
+	ballLayer.setX(400 + z);
+	ballLayer.setY(posY);
 
-    float zTime = (time / (100 / 33)) * 0.1;
-    if (currentTime <= 11 && zTime >= (float)currentTime/10) {
-        if (currentTime == 2 || currentTime == 7 || currentTime == 10) {
-            std::cout << "next ball\n";
-            ball.nextBall();
-            ballLayer.setSprite(ball.getCurrentSprite());
+	//int t0 = 0,   // t = 0
+ //       t1 = 150, // t = 0.666
+ //       t2 = 208, // t = 0.924
+ //       t3 = 225; // t = 1
 
-        }
+	//int posX = ballLayer.getX() + ball.getSpeedX(),
+	//	posY = ballLayer.getY() + ball.getSpeedY();
 
-        if (currentTime < 7) {
-            posY = t1*zTime/0.666;
-        } else if (currentTime < 10) {
-            posY = t2*zTime/0.924;
-        } else if (currentTime > 10) {
-            posY = t3*zTime;
-        }
-        currentTime++;
-    }
+ //   float zTime = (time / (100 / 33)) * 0.1;
+ //   if (currentTime <= 11 && zTime >= (float)currentTime/10) {
+ //       if (currentTime == 2 || currentTime == 7 || currentTime == 10) {
+ //           std::cout << "next ball\n";
+ //           ball.nextBall();
+ //           ballLayer.setSprite(ball.getCurrentSprite());
 
-    ballLayer.setX(posX);
-    ballLayer.setY(posY);
+ //       }
 
-    if (ball.getSpeedY() > 0) time++;
+ //       if (currentTime < 7) {
+ //           posY = t1*zTime/0.666;
+ //       } else if (currentTime < 10) {
+ //           posY = t2*zTime/0.924;
+ //       } else if (currentTime > 10) {
+ //           posY = t3*zTime;
+ //       }
+ //       currentTime++;
+ //   }
+
+ //   ballLayer.setX(posX);
+ //   ballLayer.setY(posY);
 
     Layer* goalkeeper = this->layers.at(1);
 
@@ -292,13 +303,15 @@ bool Game::isBallOutOfPlay() {
 }
 
 bool Game::hasCrossedGoalLine() {
-	return ballLayer.getX() >= (286 + ballLayer.getWidth()) || ballLayer.getX() <= (490 - ballLayer.getWidth());
+	return ballLayer.getX() >= 280 && ballLayer.getX() <= 520;
 }
 
 void Game::prepare() {
 	ballLayer.setX(400);
 	ballLayer.setY(0);
-	ball.setSpeedY(0);
+	ball.setSpeedX(0);
+	ball.setSpeedY(2.0);
+	currentAngleDirection = 0;
 
     currentTime = 1;
     ball.setCurrentBall(0);
@@ -322,7 +335,7 @@ void Game::kick(int x, int y) {
 	if ((axisX >= 0 && axisX <= ballLayer.getWidth()) &&
 		(axisY >= 0 && axisY <= ballLayer.getHeight())) {
 		prepare();
-		ball.setSpeedY(1);
+		currentAngleDirection = axisX * 6;
 		std::cout << axisX << "\t" << axisY << "\n";
 	}
 }

@@ -128,7 +128,7 @@ bool Game::checkForCollision() {
 
 
 int Game::animateBall(int time) {
-    ballLayer.saveCurrentPosition();
+    ballLayer.saveCurrentPosition();	
 
 	//ToDo:: Aplicar calculo de balistica
 	if (currentAngleDirection > 0) {
@@ -139,7 +139,7 @@ int Game::animateBall(int time) {
 		double w = z * tan(a) - 0.5 * 98 * (temp * temp);
 
 		//ToDo:: Troca de Bola em Funcao do time por "v"
-		if (ballLayer.getY() / 60 >= currentTime) {
+		if (ballLayer.getY() / 45 >= currentTime) {
 			ball.nextBall();
 			ballLayer.setSprite(ball.getCurrentSprite());
 			currentTime++;
@@ -149,36 +149,6 @@ int Game::animateBall(int time) {
 		ballLayer.setX(400 + z);
 		ballLayer.setY(posY);
 	}
-
-	//int t0 = 0,   // t = 0
- //       t1 = 150, // t = 0.666
- //       t2 = 208, // t = 0.924
- //       t3 = 225; // t = 1
-
-	//int posX = ballLayer.getX() + ball.getSpeedX(),
-	//	posY = ballLayer.getY() + ball.getSpeedY();
-
- //   float zTime = (time / (100 / 33)) * 0.1;
- //   if (currentTime <= 11 && zTime >= (float)currentTime/10) {
- //       if (currentTime == 2 || currentTime == 7 || currentTime == 10) {
- //           std::cout << "next ball\n";
- //           ball.nextBall();
- //           ballLayer.setSprite(ball.getCurrentSprite());
-
- //       }
-
- //       if (currentTime < 7) {
- //           posY = t1*zTime/0.666;
- //       } else if (currentTime < 10) {
- //           posY = t2*zTime/0.924;
- //       } else if (currentTime > 10) {
- //           posY = t3*zTime;
- //       }
- //       currentTime++;
- //   }
-
- //   ballLayer.setX(posX);
- //   ballLayer.setY(posY);
 
     Layer* goalkeeper = this->layers.at(1);
 

@@ -335,7 +335,7 @@ bool Game::nextLevel() {
         drawLayer(layers.at(0));
         loadLevel(l);
     } else {
-        cout << "Out of levels\n";
+        std::cout << "Out of levels\n";
         return false;
     }
 

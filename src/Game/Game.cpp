@@ -129,7 +129,7 @@ bool Game::checkForCollision() {
 
 int Game::animateBall(int time) {
     ballLayer.saveCurrentPosition();
-	
+
 	//ToDo:: Aplicar calculo de balistica
 	if (currentAngleDirection > 0) {
 		double v = ball.getSpeedY();
@@ -240,9 +240,6 @@ void Game::run() {
     }
 
     drawLayer(&ballLayer);
-
-    // Draw ball
-    ballLayer.draw(this->scene, ballLayer.getX(), ballLayer.getY());
 }
 
 void Game::drawLayer(Layer* layer) {

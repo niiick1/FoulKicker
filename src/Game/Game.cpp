@@ -97,7 +97,7 @@ bool Game::checkForCollision() {
 	bool collision = false;
 
 	Layer* goalkeeper = this->layers.at(1);
-	
+
 	// GoalKeeper collision
 	if ((ballLayer.getY() >= goalkeeper->getY() && ballLayer.getY() < 215) &&
 		(ballLayer.getX() >= goalkeeper->getX() && ballLayer.getX() <= goalkeeper->getX() + goalkeeper->getWidth())) {
@@ -128,7 +128,7 @@ bool Game::checkForCollision() {
 
 
 int Game::animateBall(int time) {
-    ballLayer.saveCurrentPosition();	
+    ballLayer.saveCurrentPosition();
 
 	//ToDo:: Aplicar calculo de balistica
 	if (currentAngleDirection > 0) {
@@ -254,6 +254,8 @@ void Game::display(void) {
 }
 
 void Game::loadLevel(Level newLevel) {
+    std::cout << "Level " << level.getLevel() << "\n";
+
     while (!wallLayers.empty()) {
         wallLayers.pop_back();
     }
@@ -320,7 +322,6 @@ bool Game::nextLevel() {
         Level l = levels.front();
         levels.erase(levels.begin());
         level = l;
-        std::cout << level.getLevel() << "\n";
         // draw background
         drawLayer(layers.at(0));
         loadLevel(l);

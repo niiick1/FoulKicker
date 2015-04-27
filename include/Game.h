@@ -43,6 +43,7 @@ class Game
         int currentTime;
 		int goals;
 		int attempts;
+		string boardMessage;
 		float currentAngleDirection;
 		std::string boardMessage;
 

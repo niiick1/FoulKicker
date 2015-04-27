@@ -25,6 +25,17 @@ void Ball::loadAssets() {
 
     balls.push_back(ball0);
 
+    Sprite ball05;
+    ball05.setSprite(ptm.readFile("resources/img/balls-mid.ptm"));
+    ball05.setFrameCount(7);
+    ball05.setCurrentFrame(0);
+    ball05.setFrameHeight(ball05.getSprite()->getHeight());
+    ball05.setFrameWidth(24);
+    ball05.setOffsetX(5);
+    ball05.setOffsetY(0);
+
+    balls.push_back(ball05);
+
     Sprite ball1;
     ball1.setSprite(ptm.readFile("resources/img/balls-line.ptm"));
     ball1.setFrameCount(7);
@@ -62,5 +73,5 @@ void Ball::loadAssets() {
 void Ball::nextBall() {
     if (++currentBall >= (int)balls.size()) {
         currentBall = 0;
-    }	
+    }
 }

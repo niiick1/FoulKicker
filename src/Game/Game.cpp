@@ -49,8 +49,8 @@ Game::Game() :
     levels.push_back(l2);
 
     Level l3(3);
-    l3.addPlayerOnWall(Position(490, 150));
     l3.addPlayerOnWall(Position(440, 150));
+    l3.addPlayerOnWall(Position(490, 150));
     levels.push_back(l3);
 
     Level l4(4);
@@ -60,9 +60,9 @@ Game::Game() :
     levels.push_back(l4);
 
     Level l5(5);
-    l5.addPlayerOnWall(Position(490, 150));
-    l5.addPlayerOnWall(Position(440, 150));
     l5.addPlayerOnWall(Position(390, 150));
+    l5.addPlayerOnWall(Position(440, 150));
+    l5.addPlayerOnWall(Position(490, 150));
     levels.push_back(l5);
 
     // set initial speed of the ball

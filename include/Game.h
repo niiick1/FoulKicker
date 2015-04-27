@@ -41,6 +41,8 @@ class Game
         std::vector<Layer> wallLayers;
         std::vector<Level> levels;
         int currentTime;
+		int goals;
+		int attempts;
 		float currentAngleDirection;
 
         bool nextLevel();

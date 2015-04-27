@@ -99,7 +99,7 @@ bool Game::checkForCollision() {
 	Layer* goalkeeper = this->layers.at(1);
 	
 	// GoalKeeper collision
-	if ((ballLayer.getY() >= goalkeeper->getY() && ballLayer.getY() < 220) &&
+	if ((ballLayer.getY() >= goalkeeper->getY() && ballLayer.getY() < 215) &&
 		(ballLayer.getX() >= goalkeeper->getX() && ballLayer.getX() <= goalkeeper->getX() + goalkeeper->getWidth())) {
 		collision = true;
 	}
@@ -169,7 +169,8 @@ int Game::animateBall(int time) {
 		prepare();
 		Sleep(250);
 
-		std::cout << "Goal" << "\n";
+		goals++;
+		std::cout << "Goal (" << goals << " / " << attempts << ")\n";
 		time = 0;
 		nextLevel();
 	}
@@ -293,7 +294,6 @@ void Game::prepare() {
 }
 
 void Game::kick(int x, int y) {
-	std::cout << "Kick " << x << "\t" << y << "\n";
 
 	int diffY = window.getHeight() - y;
 
@@ -311,7 +311,7 @@ void Game::kick(int x, int y) {
 		(axisY >= 0 && axisY <= ballLayer.getHeight())) {
 		prepare();
 		currentAngleDirection = abs(180 - axisX * 6);
-		std::cout << axisX << "\t" << axisY << "\n";
+		attempts++;
 	}
 }
 

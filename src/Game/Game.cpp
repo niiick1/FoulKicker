@@ -100,7 +100,7 @@ bool Game::checkForCollision() {
 	Layer* goalkeeper = this->layers.at(1);
 
 	// GoalKeeper collision
-	if ((ballLayer.getY() >= goalkeeper->getY() && ballLayer.getY() < 215) &&
+	if ((ballLayer.getY() >= goalkeeper->getY() && ballLayer.getY() < 214) &&
 		(ballLayer.getX() >= goalkeeper->getX() && ballLayer.getX() <= goalkeeper->getX() + goalkeeper->getWidth())) {
 		collision = true;
 	}

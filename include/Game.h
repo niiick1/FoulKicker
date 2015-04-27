@@ -44,6 +44,7 @@ class Game
 		int goals;
 		int attempts;
 		float currentAngleDirection;
+		std::string boardMessage;
 
         bool nextLevel();
         void loadLevel(Level newLevel);

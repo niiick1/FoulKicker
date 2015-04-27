@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include "Game.h"
 #include <gl\GL.h>
-#include <gl\glut.h>
+#include <gl\freeglut.h>
 #include "RGBAColor.h"
 #include "SpriteLayer.h"
 #include "WallPlayer.h"
@@ -175,6 +175,8 @@ int Game::animateBall(int time) {
 		nextLevel();
 	}
 
+	boardMessage = "Goals: " + std::to_string(goals) + "\n" + "Attempts: " + std::to_string(attempts);
+
 	/*
      * Trave Esquerda x@286
      * Trave Direita x@490
@@ -247,8 +249,15 @@ void Game::drawLayer(Layer* layer) {
 }
 
 void Game::display(void) {
+    glColor3f(255, 255, 0);
+
+    glRasterPos2f(0, 0);
 
     glDrawPixels(scene->getWidth(), scene->getHeight(), GL_BGRA_EXT, GL_UNSIGNED_BYTE, scene->getPixels());
+
+    glRasterPos2f(370, 430);
+
+    glutBitmapString(GLUT_BITMAP_HELVETICA_12, (const unsigned char*) boardMessage.c_str());
 
     glFlush();
 }

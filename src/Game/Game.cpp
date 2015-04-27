@@ -10,6 +10,7 @@
 
 #include <math.h>
 #include <iostream>
+#include <gl\freeglut.h>
 
 Game::Game() :
     window(800, 600, "Foul Kicker"), level(0)
@@ -157,19 +158,22 @@ int Game::animateBall(int time) {
 	 */
 	if (checkForCollision()) {
 		//Goal Defense
+		boardMessage = "Miss";
 		prepare();
 		Sleep(250);
 
-		std::cout << "Goal Defense" << "\n";
+		std::cout << "Goal Defense (" << goals << " / " << attempts << ")\n";
 		time = 0;
 	}
 
 	if (isBallOutOfPlay() && hasCrossedGoalLine()) {
 		//Goal
+		goals++;
+
+		boardMessage = std::to_string(goals) + " / " + std::to_string(attempts);
 		prepare();
 		Sleep(250);
 
-		goals++;
 		std::cout << "Goal (" << goals << " / " << attempts << ")\n";
 		time = 0;
 		nextLevel();
@@ -248,9 +252,19 @@ void Game::drawLayer(Layer* layer) {
 
 void Game::display(void) {
 
-    glDrawPixels(scene->getWidth(), scene->getHeight(), GL_BGRA_EXT, GL_UNSIGNED_BYTE, scene->getPixels());
+	std::string str = boardMessage;
 
-    glFlush();
+	glColor3f(0, 255, 0);
+
+	glRasterPos2f(0, 0);
+
+	glDrawPixels(scene->getWidth(), scene->getHeight(), GL_BGRA_EXT, GL_UNSIGNED_BYTE, scene->getPixels());
+
+	glRasterPos2f(380.0f, 418.0f);
+
+	glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)str.c_str());
+
+	glFlush();
 }
 
 void Game::loadLevel(Level newLevel) {
@@ -332,4 +346,3 @@ bool Game::nextLevel() {
 
     return true;
 }
-

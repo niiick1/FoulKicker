@@ -36,10 +36,34 @@ Game::Game() :
      * TODO: Level layout initialization should be in
      * another place. Maybe on a file later.
      */
-    level.addPlayerOnWall(Position(200, 150));
-    level.addPlayerOnWall(Position(250, 150));
-    level.addPlayerOnWall(Position(300, 150));
+    level.addPlayerOnWall(Position(270, 150));
     loadLevel(level);
+
+    Level l(1);
+    l.addPlayerOnWall(Position(490, 150));
+    levels.push_back(l);
+
+    Level l2(2);
+    l2.addPlayerOnWall(Position(270, 150));
+    l2.addPlayerOnWall(Position(320, 150));
+    levels.push_back(l2);
+
+    Level l3(3);
+    l3.addPlayerOnWall(Position(490, 150));
+    l3.addPlayerOnWall(Position(440, 150));
+    levels.push_back(l3);
+
+    Level l4(4);
+    l4.addPlayerOnWall(Position(270, 150));
+    l4.addPlayerOnWall(Position(320, 150));
+    l4.addPlayerOnWall(Position(370, 150));
+    levels.push_back(l4);
+
+    Level l5(5);
+    l5.addPlayerOnWall(Position(490, 150));
+    l5.addPlayerOnWall(Position(440, 150));
+    l5.addPlayerOnWall(Position(390, 150));
+    levels.push_back(l5);
 
     // set initial speed of the ball
     ball.setSpeedX(0);
@@ -116,7 +140,7 @@ int Game::animateBall(int time) {
 	int posX = ballLayer.getX() + ball.getSpeedX(),
 		posY = ballLayer.getY() + ball.getSpeedY();
 
-    float zTime = (time / (600 / 33)) * 0.1;
+    float zTime = (time / (100 / 33)) * 0.1;
     if (currentTime <= 11 && zTime >= (float)currentTime/10) {
         if (currentTime == 2 || currentTime == 7 || currentTime == 10) {
             std::cout << "next ball\n";
@@ -157,6 +181,7 @@ int Game::animateBall(int time) {
 		prepare();
 		std::cout << "Goal" << "\n";
 		time = 0;
+		nextLevel();
 	}
 
 	/*
@@ -299,3 +324,21 @@ void Game::kick(int x, int y) {
 		std::cout << axisX << "\t" << axisY << "\n";
 	}
 }
+
+bool Game::nextLevel() {
+    if (levels.size() > 0) {
+        Level l = levels.front();
+        levels.erase(levels.begin());
+        level = l;
+        std::cout << level.getLevel() << "\n";
+        // draw background
+        drawLayer(layers.at(0));
+        loadLevel(l);
+    } else {
+        cout << "Out of levels\n";
+        return false;
+    }
+
+    return true;
+}
+

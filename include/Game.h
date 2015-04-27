@@ -39,8 +39,10 @@ class Game
         int goalkeeperDirection;
         std::vector<Layer*> layers;
         std::vector<Layer> wallLayers;
+        std::vector<Level> levels;
         int currentTime;
 
+        bool nextLevel();
         void loadLevel(Level newLevel);
 };
 

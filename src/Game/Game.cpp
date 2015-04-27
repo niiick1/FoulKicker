@@ -98,8 +98,9 @@ bool Game::checkForCollision() {
 
 	Layer* goalkeeper = this->layers.at(1);
 
+	int Y = goalkeeper->getY();
 	// GoalKeeper collision
-	if ((ballLayer.getY() >= goalkeeper->getY() && ballLayer.getY() <= 224) &&
+	if ((ballLayer.getY() >= goalkeeper->getY() && ballLayer.getY() < 220) &&
 		(ballLayer.getX() >= goalkeeper->getX() && ballLayer.getX() <= goalkeeper->getX() + goalkeeper->getWidth())) {
 		collision = true;
 	}
@@ -158,6 +159,8 @@ int Game::animateBall(int time) {
 	if (checkForCollision()) {
 		//Goal Defense
 		prepare();
+		Sleep(250);
+
 		std::cout << "Goal Defense" << "\n";
 		time = 0;
 	}
@@ -165,6 +168,8 @@ int Game::animateBall(int time) {
 	if (isBallOutOfPlay() && hasCrossedGoalLine()) {
 		//Goal
 		prepare();
+		Sleep(250);
+
 		std::cout << "Goal" << "\n";
 		time = 0;
 		nextLevel();

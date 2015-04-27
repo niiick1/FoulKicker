@@ -129,23 +129,23 @@ bool Game::checkForCollision() {
 
 int Game::animateBall(int time) {
     ballLayer.saveCurrentPosition();
-
-	if (currentAngleDirection == 0) return time;
-
+	
 	//ToDo:: Aplicar calculo de balistica
-	double v = 3.0;
-	double a = currentAngleDirection * M_PI / 180.0;
-	double z = v * cos(a) * ++time;
-	double temp = z / (v * cos(a));
-	double w = z * tan(a) - 0.5 * 98 * (temp * temp);
+	if (currentAngleDirection > 0) {
+		double v = ball.getSpeedY();
+		double a = currentAngleDirection * M_PI / 180.0;
+		double z = v * cos(a) * ++time;
+		double temp = z / (v * cos(a));
+		double w = z * tan(a) - 0.5 * 98 * (temp * temp);
 
-	//ToDo:: Troca de Bola em Funcao do time por "v"
-	/*ball.nextBall();
-	ballLayer.setSprite(ball.getCurrentSprite());*/
+		//ToDo:: Troca de Bola em Funcao do time por "v"
+		/*ball.nextBall();
+		ballLayer.setSprite(ball.getCurrentSprite());*/
 
-	int posY = ballLayer.getY() + ball.getSpeedY();
-	ballLayer.setX(400 + z);
-	ballLayer.setY(posY);
+		int posY = ballLayer.getY() + v;
+		ballLayer.setX(400 + z);
+		ballLayer.setY(posY);
+	}
 
 	//int t0 = 0,   // t = 0
  //       t1 = 150, // t = 0.666
@@ -335,7 +335,7 @@ void Game::kick(int x, int y) {
 	if ((axisX >= 0 && axisX <= ballLayer.getWidth()) &&
 		(axisY >= 0 && axisY <= ballLayer.getHeight())) {
 		prepare();
-		currentAngleDirection = axisX * 6;
+		currentAngleDirection = abs(180 - axisX * 6);
 		std::cout << axisX << "\t" << axisY << "\n";
 	}
 }

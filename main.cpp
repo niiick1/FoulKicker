@@ -15,11 +15,11 @@ void render(void) {
 }
 
 void animate(int t) {
-    g.animateBall(t);
+    int time = g.animateBall(t);
 
     glutPostRedisplay();
     // Reset timer
-    glutTimerFunc(30, animate, ++t);
+    glutTimerFunc(33, animate, time);
 }
 
 void handleMouseClick(int button, int state, int x, int y) {
@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 
     /*  initialize viewing values  */
     glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -45,12 +45,11 @@ int main(int argc, char* argv[])
     glOrtho(0, g.getWindow().getWidth(), 0, g.getWindow().getHeight(), 0, 1.0);
 
 	glutMouseFunc(handleMouseClick);
-	
+
 	glutDisplayFunc(render);
 
-    glutTimerFunc(30, animate, 0);
-
-	glutMainLoop();
+    glutTimerFunc(33, animate, 0);
+    glutMainLoop();
 
     return 0;   /* ISO C requires main to return int. */
 }

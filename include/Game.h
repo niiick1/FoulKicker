@@ -17,7 +17,7 @@ class Game
 
         void run();
         void drawLayer(Layer* layer);
-        void animateBall(int time);
+        int animateBall(int time);
         void display(void);
 		void kick(int x, int y);
 		void prepare();
@@ -39,6 +39,7 @@ class Game
         int goalkeeperDirection;
         std::vector<Layer*> layers;
         std::vector<Layer> wallLayers;
+        int currentTime;
 
         void loadLevel(Level newLevel);
 };

@@ -130,14 +130,14 @@ bool Game::checkForCollision() {
 int Game::animateBall(int time) {
     ballLayer.saveCurrentPosition();
 
-	if (ball.getSpeedY() == 0) return time;
+	if (currentAngleDirection == 0) return time;
 
 	//ToDo:: Aplicar calculo de balistica
 	double v = 3.0;
-	double a = (currentAngleDirection * M_PI) / 180.0;
+	double a = currentAngleDirection * M_PI / 180.0;
 	double z = v * cos(a) * ++time;
 	double temp = z / (v * cos(a));
-	double w = z * tan(a) - 0.5 * 9.8 * (temp * temp);
+	double w = z * tan(a) - 0.5 * 98 * (temp * temp);
 
 	//ToDo:: Troca de Bola em Funcao do time por "v"
 	/*ball.nextBall();

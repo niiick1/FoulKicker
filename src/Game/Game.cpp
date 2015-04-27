@@ -302,7 +302,8 @@ void Game::kick(int x, int y) {
 	int axisX = finalX - x;
 	int axisY = finalY - abs(diffY);
 
-	if ((axisX >= 0 && axisX <= ballLayer.getWidth()) &&
+	if (initialY == 0 &&
+		(axisX >= 0 && axisX <= ballLayer.getWidth()) &&
 		(axisY >= 0 && axisY <= ballLayer.getHeight())) {
 		prepare();
 		currentAngleDirection = abs(180 - axisX * 6);

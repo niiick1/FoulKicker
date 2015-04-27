@@ -124,6 +124,8 @@ bool Game::checkForCollision() {
 int Game::animateBall(int time) {
     ballLayer.saveCurrentPosition();
 
+	if (ball.getSpeedY() == 0) return time;
+
 	//ToDo:: Aplicar calculo de balistica
 	//double v = 3.0;
 	//double angulo = 30.0;
